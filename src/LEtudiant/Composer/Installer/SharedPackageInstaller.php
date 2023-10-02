@@ -112,7 +112,7 @@ class SharedPackageInstaller extends LibraryInstaller
             $prom = parent::install($repo, $package);
         } elseif (!$repo->hasPackage($package)) {
 
-            $prom = \React\Promise\resolve();
+            $prom = \React\Promise\resolve(null);
             $binaryInstaller = $this->binaryInstaller;
             $installPath = $this->getInstallPath($package);
     
@@ -170,7 +170,7 @@ class SharedPackageInstaller extends LibraryInstaller
             // Install the target package
             $this->composer->getInstallationManager()->install($repo, new InstallOperation($target));
 
-            $prom = \React\Promise\resolve();
+            $prom = \React\Promise\resolve(null);
         }
         return $prom;
     }
@@ -196,7 +196,7 @@ class SharedPackageInstaller extends LibraryInstaller
         } else {
             $this->binaryInstaller->removeBinaries($package);
             $repo->removePackage($package);
-            $prom = \React\Promise\resolve();
+            $prom = \React\Promise\resolve(null);
         }
 
         $prom = $prom->then(function() use ($package) {
